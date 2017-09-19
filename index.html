@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="tools/bootstrap.css">
+    <style>
+        .box {
+            border:1px solid #ddd;
+            padding:30px;
+            width: 800px;
+            margin: 50px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <form action="email">
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="text" class="form-control" id="email"
+                data-dr-required = true
+                data-dr-reg = '\w+@\w+.\w+'
+                data-dr-required-msg = "邮箱不能为空"
+                data-dr-reg-msg = "邮箱格式不正确"
+                >
+            </div>
+            <div class="form-group">
+                <label for="tel">手机号码</label>
+                <input type="text" class="form-control" id="tel"
+                data-dr-required = true
+                data-dr-required-msg = "手机号码不能为空"                
+                data-dr-tel = true
+                data-dr-tel-msg = "手机号码格式不正确"                
+                >
+            </div>
+               <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password"
+                data-dr-required = true
+                data-dr-required-msg = "密码不能为空"
+                data-dr-min-length = 6
+                data-dr-min-length-msg = "密码最少为6位"
+                >
+            </div>
+            <div class="form-group">
+                <label for="rePwd">确认密码</label>
+                <input type="password" class="form-control" id="rePwd"
+                data-dr-required = true
+                data-dr-required-msg = "确认密码不能为空"
+                data-dr-confirm = true
+                data-dr-confirm-msg = "两次密码输入不一致"
+                >
+            </div>
+            <input type="submit" class="btn btn-default" value="注册">
+        </form>
+    </div>
+    <script src="tools/jquery-1.10.2.js"></script>
+    <script src="tools/dataResult.js"></script>
+    <script>
+        $('form').dataResult({
+            //自定义校验规则
+            'tel':function(){
+                //这里的this指的是应用该校验规则的元素的jQuery对象
+                return new RegExp('^1[0-9]{10}$').test(this.val())
+            }
+        },{
+            'initEvent':'blur'  //触发校验的事件
+        });
+    </script>
+</body>
+</html>
